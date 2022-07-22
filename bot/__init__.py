@@ -16,6 +16,7 @@
 
 """ credentials """
 
+
 import logging
 import os
 from dotenv import load_dotenv
@@ -60,9 +61,7 @@ TG_DUMP_CHAT = int(get_config(
     "TG_DUMP_CHAT",
     "-100"
 ))
-AUTH_USERS = list(set(
-    int(x) for x in get_config("AUTH_USERS").split(" ")
-))
+AUTH_USERS = list({int(x) for x in get_config("AUTH_USERS").split(" ")})
 TG_M_STREAM_URL = get_config("TG_M_STREAM_URL")
 
 logging.basicConfig(
