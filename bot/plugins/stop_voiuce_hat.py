@@ -47,8 +47,7 @@ async def stop_commnd_fn(_, message: Message):
     except IndexError:
         _chat_id = message.chat.id
 
-    group_call = GROUP_CALLS.get(_chat_id)
-    if group_call:
+    if group_call := GROUP_CALLS.get(_chat_id):
         await group_call.stop()
 
     await status_message.delete()

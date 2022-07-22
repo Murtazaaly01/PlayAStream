@@ -44,8 +44,7 @@ async def mute_commnd_fn(_, message: Message):
     except IndexError:
         _chat_id = message.chat.id
 
-    group_call = GROUP_CALLS.get(_chat_id)
-    if group_call:
+    if group_call := GROUP_CALLS.get(_chat_id):
         await group_call.set_is_mute(True)
 
     await status_message.delete()
@@ -68,8 +67,7 @@ async def un_mute_commnd_fn(_, message: Message):
     except IndexError:
         _chat_id = message.chat.id
 
-    group_call = GROUP_CALLS.get(_chat_id)
-    if group_call:
+    if group_call := GROUP_CALLS.get(_chat_id):
         await group_call.set_is_mute(False)
 
     await status_message.delete()

@@ -36,20 +36,17 @@ def extract_link(message: Message) -> Tuple[str, str]:
     )
     if message and text and len(entities) > 0:
         for one_entity in entities:
-            if one_entity.type == "url":
+            if one_entity.type == "text_link":
+                leech_url = one_entity.url
+            elif one_entity.type == "url":
                 leech_url = text[
                     one_entity.offset:one_entity.offset + one_entity.length
                 ]
-            elif one_entity.type == "text_link":
-                leech_url = one_entity.url
             if leech_url:
                 break
         if "|" in text:
             _, custom_file_name = text.split("|", maxsplit=1)
         if leech_url:
             leech_url = leech_url.strip()
-        if custom_file_name:
-            custom_file_name = custom_file_name.strip()
-        else:
-            custom_file_name = None
+        custom_file_name = custom_file_name.strip() if custom_file_name else None
     return (leech_url, custom_file_name)

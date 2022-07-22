@@ -208,8 +208,7 @@ async def hc_stream_radio_stop(client: Bot, message: Message):
         except ChatAdminRequired:
             LOGGER(__name__).exception(msg="invalid admin error")
 
-        group_call = GROUP_CALLS.get(_chat_id)
-        if group_call:
+        if group_call := GROUP_CALLS.get(_chat_id):
             await group_call.stop()
 
     await status_message.delete()
